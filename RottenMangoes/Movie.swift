@@ -11,11 +11,13 @@ import Foundation
 class Movie {
     var title: String
     var thumbnailStringURL: String
+    var movieID: String
     var movies = [Movie]()
     
-    init(title: String, thumbnailStringURL: String) {
+    init(title: String, thumbnailStringURL: String, movieID: String) {
         self.title = title
         self.thumbnailStringURL = thumbnailStringURL
+        self.movieID = movieID
 
     }
     
@@ -27,10 +29,11 @@ class Movie {
             for movieResult in allResults {
             // Create the movie
                 var title = movieResult["title"] as String
+                var movieID = movieResult["id"] as String
                 var postersDict: NSDictionary = movieResult["posters"] as NSDictionary
                 var thumbnailStringURL = postersDict["thumbnail"] as String
 
-                var movie = Movie(title: title, thumbnailStringURL: thumbnailStringURL)
+                var movie = Movie(title: title, thumbnailStringURL: thumbnailStringURL, movieID: movieID)
                 movies.append(movie)
                     
                 }
