@@ -14,7 +14,8 @@ class ViewController: UITableViewController, APIControllerProtocol {
     let pageLimit = "&page_limit=50"
     var movies = [Movie]()
     var api : APIController?
-
+    @IBOutlet var moviesTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let myStringURL = URL + apiKey + pageLimit
@@ -36,10 +37,27 @@ class ViewController: UITableViewController, APIControllerProtocol {
         var resultsArr: NSArray = results["movies"] as NSArray
         dispatch_async(dispatch_get_main_queue(), {
         self.movies = Movie.getMoviesWithJSON(resultsArr)
-
+        self.moviesTableView.reloadData()
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
     }
 
+    //MARK: Table View Methods
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as UITableViewCell
+        let movie = movies[indexPath.row]
+        let movieName = movie.title
+        cell.textLabel?.text = movieName
+        return cell
+    }
+    
 }
 
