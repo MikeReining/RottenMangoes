@@ -10,10 +10,13 @@ import Foundation
 
 class Movie {
     var title: String
+    var thumbnail: String
     var movies = [Movie]()
     
-    init(title: String) {
+    init(title: String, thumbnail: String) {
         self.title = title
+        self.thumbnail = thumbnail
+
     }
     
     class func getMoviesWithJSON(allResults: NSArray) -> [Movie] {
@@ -21,11 +24,14 @@ class Movie {
         var movies = [Movie]()
         
         if allResults.count>0 {
-            for movieInfo in allResults {
+            for movieResult in allResults {
             // Create the movie
-                var title = movieInfo["title"] as? String
-                
-                var movie = Movie(title: title!)
+                var title = movieResult["title"] as String
+                var postersDict: NSDictionary = movieResult["posters"] as NSDictionary
+                    println(postersDict)
+                var thumbnail = postersDict["thumbnail"] as String
+
+                var movie = Movie(title: title, thumbnail: thumbnail)
                 movies.append(movie)
                     
                 }
@@ -33,3 +39,4 @@ class Movie {
         return movies
     }
 }
+
