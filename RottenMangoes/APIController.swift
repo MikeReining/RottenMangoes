@@ -20,7 +20,7 @@ class APIController {
         self.delegate = delegate
     }
     
-    func getJSONResults(urlString: String) {
+    func getJSONMovieResults(urlString: String) {
         let url = NSURL(string: urlString)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithURL(url!, completionHandler: {data, response, error -> Void in
@@ -40,5 +40,28 @@ class APIController {
         })
         task.resume()
     }
+    
+    func getJSONReviewResults(urlString: String) {
+        let url = NSURL(string: urlString)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url!, completionHandler: {data, response, error -> Void in
+            println("Task completed")
+            if(error != nil) {
+                // If there is an error in the web request, print it to the console
+                println(error.localizedDescription)
+            }
+            var err: NSError?
+            var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+            if(err != nil) {
+                // If there is an error parsing JSON, print it to the console
+                println("JSON Error \(err!.localizedDescription)")
+            }
+            let results: NSArray = jsonResult["reviews"] as NSArray
+            self.delegate.didReceiveAPIResults(jsonResult)
+        })
+        task.resume()
+    }
+    
+    
     
 }

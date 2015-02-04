@@ -22,7 +22,7 @@ class ViewController: UITableViewController, APIControllerProtocol {
         println(myStringURL)
         api = APIController(delegate: self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        api?.getJSONResults(myStringURL)
+        api?.getJSONMovieResults(myStringURL)
         self.navigationController?.setToolbarHidden(false, animated: true)
 
     }
@@ -32,7 +32,7 @@ class ViewController: UITableViewController, APIControllerProtocol {
         // Dispose of any resources that can be recreated.
     }
     
-    // Did Receive API Results Method
+    //MARK API Controller Protocol Methods
     func didReceiveAPIResults(results: NSDictionary) {
         var resultsArr: NSArray = results["movies"] as NSArray
         dispatch_async(dispatch_get_main_queue(), {

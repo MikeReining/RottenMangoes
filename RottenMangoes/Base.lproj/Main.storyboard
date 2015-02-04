@@ -136,7 +136,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y01-fM-d33">
-                                <rect key="frame" x="33" y="89" width="42" height="21"/>
+                                <rect key="frame" x="31" y="89" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQu-v0-Kna">
+                                <rect key="frame" x="31" y="129" width="538" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -144,12 +150,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="nQu-v0-Kna" secondAttribute="trailing" constant="15" id="BvO-4p-QZC"/>
                             <constraint firstItem="y01-fM-d33" firstAttribute="top" secondItem="vth-Nw-VCZ" secondAttribute="bottom" constant="25" id="R5N-Ef-xWp"/>
-                            <constraint firstItem="y01-fM-d33" firstAttribute="leading" secondItem="zMd-vn-WaF" secondAttribute="leadingMargin" constant="17" id="jjr-Zg-sxK"/>
+                            <constraint firstItem="nQu-v0-Kna" firstAttribute="leading" secondItem="zMd-vn-WaF" secondAttribute="leadingMargin" constant="15" id="fxS-rF-eHg"/>
+                            <constraint firstItem="y01-fM-d33" firstAttribute="leading" secondItem="zMd-vn-WaF" secondAttribute="leadingMargin" constant="15" id="jjr-Zg-sxK"/>
+                            <constraint firstItem="nQu-v0-Kna" firstAttribute="top" secondItem="y01-fM-d33" secondAttribute="bottom" constant="20" id="oWs-Mv-r15"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="movieNameLabel" destination="y01-fM-d33" id="zCk-U7-Xnh"/>
+                        <outlet property="review1Label" destination="nQu-v0-Kna" id="XHs-U4-FNc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oFo-yF-V9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
