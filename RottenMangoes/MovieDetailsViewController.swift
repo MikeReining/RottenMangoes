@@ -20,6 +20,10 @@ class MovieDetailsViewController: UIViewController, APIControllerProtocol {
     
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var review1Label: UILabel!
+    @IBOutlet weak var review1criticLabel: UILabel!
+    
+    @IBOutlet weak var review2Label: UILabel!
+    @IBOutlet weak var review2CriticLabel: UILabel!
     
     override func viewDidLoad() {
         let movieID = String(movie!.movieID)
@@ -41,6 +45,9 @@ class MovieDetailsViewController: UIViewController, APIControllerProtocol {
         dispatch_async(dispatch_get_main_queue(), {
             self.reviews = Review.getReviesWithJSON(resultsArr)
             self.review1Label.text = self.reviews[0].quote
+            self.review1criticLabel.text = self.reviews[0].critic
+            self.review2Label.text = self.reviews[1].quote
+            self.review2CriticLabel.text = self.reviews[1].critic
             self.refreshGUI()
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
