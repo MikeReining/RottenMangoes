@@ -68,6 +68,13 @@ class ViewController: UITableViewController, APIControllerProtocol {
             let nvc = segue.destinationViewController as CollectionViewController
             nvc.movies = movies
         }
+        
+        if segue.identifier == "tableMovieDetails" {
+            let nvc = segue.destinationViewController as MovieDetailsViewController
+            let indexPath = moviesTableView.indexPathForSelectedRow()?.row
+            let movie = movies[indexPath!] as Movie
+            nvc.movie = movie
+        }
     }
     
     

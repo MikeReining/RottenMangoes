@@ -19,6 +19,7 @@
 		2729D1B31A82B27C0067FD8D /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729D1B21A82B27C0067FD8D /* MovieCell.swift */; };
 		27C6D30F1A82BCC6008DC424 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6D30E1A82BCC6008DC424 /* CollectionViewController.swift */; };
 		27C6D3111A82C0D1008DC424 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6D3101A82C0D1008DC424 /* CollectionViewCell.swift */; };
+		27EA8E071A82CE580051265A /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EA8E061A82CE580051265A /* MovieDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		2729D1B21A82B27C0067FD8D /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		27C6D30E1A82BCC6008DC424 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		27C6D3101A82C0D1008DC424 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		27EA8E061A82CE580051265A /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				2729D1B21A82B27C0067FD8D /* MovieCell.swift */,
 				2729D1621A826FDF0067FD8D /* ViewController.swift */,
+				27EA8E061A82CE580051265A /* MovieDetailsViewController.swift */,
 				27C6D3101A82C0D1008DC424 /* CollectionViewCell.swift */,
 				27C6D30E1A82BCC6008DC424 /* CollectionViewController.swift */,
 			);
@@ -248,6 +251,7 @@
 			files = (
 				2729D1631A826FDF0067FD8D /* ViewController.swift in Sources */,
 				2729D1611A826FDF0067FD8D /* RottenMangoes.xcdatamodeld in Sources */,
+				27EA8E071A82CE580051265A /* MovieDetailsViewController.swift in Sources */,
 				27C6D3111A82C0D1008DC424 /* CollectionViewCell.swift in Sources */,
 				2729D1B31A82B27C0067FD8D /* MovieCell.swift in Sources */,
 				2729D1AF1A828CBE0067FD8D /* Movie.swift in Sources */,

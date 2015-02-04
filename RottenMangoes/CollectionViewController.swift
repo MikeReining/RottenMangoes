@@ -10,7 +10,6 @@ import UIKit
 
 class CollectionViewController: UICollectionViewController {
     var movies = [Movie]()
-    
     // MARK: UICollectionViewDataSource
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -29,5 +28,16 @@ class CollectionViewController: UICollectionViewController {
         let movieName = movies[indexPath.row].title
         cell.movieNameLabel.text = movieName
         return cell
+    }
+    
+    //MARK: Segues
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "collectionMovieDetails" {
+            let nvc = segue.destinationViewController as MovieDetailsViewController
+            let cell = sender as UICollectionViewCell
+            let indexPath = self.collectionView!.indexPathForCell(cell)!
+            let movie = movies[indexPath.row] as Movie
+            nvc.movie = movie        }
     }
 }
