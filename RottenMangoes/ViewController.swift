@@ -23,6 +23,8 @@ class ViewController: UITableViewController, APIControllerProtocol {
         api = APIController(delegate: self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         api?.getJSONResults(myStringURL)
+        self.navigationController?.setToolbarHidden(false, animated: true)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +60,16 @@ class ViewController: UITableViewController, APIControllerProtocol {
 
         return cell
     }
+    
+    //MARK: Segues
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCollectionView" {
+            let nvc = segue.destinationViewController as CollectionViewController
+            nvc.movies = movies
+        }
+    }
+    
     
 }
 

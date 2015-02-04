@@ -28,7 +28,6 @@ class Movie {
             // Create the movie
                 var title = movieResult["title"] as String
                 var postersDict: NSDictionary = movieResult["posters"] as NSDictionary
-                    println(postersDict)
                 var thumbnailStringURL = postersDict["thumbnail"] as String
 
                 var movie = Movie(title: title, thumbnailStringURL: thumbnailStringURL)
