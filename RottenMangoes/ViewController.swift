@@ -30,8 +30,6 @@ class ViewController: UITableViewController, APIControllerProtocol {
         // Dispose of any resources that can be recreated.
     }
     
-
-    
     // Did Receive API Results Method
     func didReceiveAPIResults(results: NSDictionary) {
         var resultsArr: NSArray = results["movies"] as NSArray
@@ -56,6 +54,8 @@ class ViewController: UITableViewController, APIControllerProtocol {
         let movie = movies[indexPath.row]
         let movieName = movie.title
         cell.movieName.text = movieName
+
+
         return cell
     }
     

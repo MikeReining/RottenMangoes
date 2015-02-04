@@ -88,7 +88,7 @@
 				2729D15D1A826FDF0067FD8D /* AppDelegate.swift */,
 				2729D1641A826FDF0067FD8D /* Main.storyboard */,
 				2729D1671A826FDF0067FD8D /* Images.xcassets */,
-				2729D1AE1A828CBE0067FD8D /* Movie.swift */,
+				27C6D30D1A82B812008DC424 /* Models */,
 				2729D1B41A82B2860067FD8D /* ViewControllers */,
 				2729D1B01A828FBD0067FD8D /* APIController.swift */,
 				2729D1691A826FDF0067FD8D /* LaunchScreen.xib */,
@@ -130,6 +130,14 @@
 				2729D1621A826FDF0067FD8D /* ViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		27C6D30D1A82B812008DC424 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2729D1AE1A828CBE0067FD8D /* Movie.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,6 +439,7 @@
 				2729D17C1A826FDF0067FD8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2729D17D1A826FDF0067FD8D /* Build configuration list for PBXNativeTarget "RottenMangoesTests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +448,7 @@
 				2729D17F1A826FDF0067FD8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
