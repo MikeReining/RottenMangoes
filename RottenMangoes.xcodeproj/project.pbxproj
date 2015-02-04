@@ -16,6 +16,7 @@
 		2729D1771A826FDF0067FD8D /* RottenMangoesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729D1761A826FDF0067FD8D /* RottenMangoesTests.swift */; };
 		2729D1AF1A828CBE0067FD8D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729D1AE1A828CBE0067FD8D /* Movie.swift */; };
 		2729D1B11A828FBD0067FD8D /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729D1B01A828FBD0067FD8D /* APIController.swift */; };
+		2729D1B31A82B27C0067FD8D /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729D1B21A82B27C0067FD8D /* MovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		2729D1761A826FDF0067FD8D /* RottenMangoesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RottenMangoesTests.swift; sourceTree = "<group>"; };
 		2729D1AE1A828CBE0067FD8D /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		2729D1B01A828FBD0067FD8D /* APIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		2729D1B21A82B27C0067FD8D /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +86,10 @@
 			isa = PBXGroup;
 			children = (
 				2729D15D1A826FDF0067FD8D /* AppDelegate.swift */,
-				2729D1621A826FDF0067FD8D /* ViewController.swift */,
 				2729D1641A826FDF0067FD8D /* Main.storyboard */,
 				2729D1671A826FDF0067FD8D /* Images.xcassets */,
 				2729D1AE1A828CBE0067FD8D /* Movie.swift */,
+				2729D1B41A82B2860067FD8D /* ViewControllers */,
 				2729D1B01A828FBD0067FD8D /* APIController.swift */,
 				2729D1691A826FDF0067FD8D /* LaunchScreen.xib */,
 				2729D15F1A826FDF0067FD8D /* RottenMangoes.xcdatamodeld */,
@@ -119,6 +121,15 @@
 				2729D1751A826FDF0067FD8D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2729D1B41A82B2860067FD8D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2729D1B21A82B27C0067FD8D /* MovieCell.swift */,
+				2729D1621A826FDF0067FD8D /* ViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +234,7 @@
 			files = (
 				2729D1631A826FDF0067FD8D /* ViewController.swift in Sources */,
 				2729D1611A826FDF0067FD8D /* RottenMangoes.xcdatamodeld in Sources */,
+				2729D1B31A82B27C0067FD8D /* MovieCell.swift in Sources */,
 				2729D1AF1A828CBE0067FD8D /* Movie.swift in Sources */,
 				2729D15E1A826FDF0067FD8D /* AppDelegate.swift in Sources */,
 				2729D1B11A828FBD0067FD8D /* APIController.swift in Sources */,

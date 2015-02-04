@@ -52,10 +52,10 @@ class ViewController: UITableViewController, APIControllerProtocol {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as MovieCell
         let movie = movies[indexPath.row]
         let movieName = movie.title
-        cell.textLabel?.text = movieName
+        cell.movieName.text = movieName
         return cell
     }
     
