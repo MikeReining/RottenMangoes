@@ -21,6 +21,7 @@
 		27C6D3111A82C0D1008DC424 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6D3101A82C0D1008DC424 /* CollectionViewCell.swift */; };
 		27EA8E071A82CE580051265A /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EA8E061A82CE580051265A /* MovieDetailsViewController.swift */; };
 		27EA8E0B1A82D8520051265A /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EA8E0A1A82D8520051265A /* Review.swift */; };
+		27EA8E0D1A82EDF10051265A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EA8E0C1A82EDF10051265A /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		27C6D3101A82C0D1008DC424 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		27EA8E061A82CE580051265A /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		27EA8E0A1A82D8520051265A /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Review.swift; path = ../Review.swift; sourceTree = "<group>"; };
+		27EA8E0C1A82EDF10051265A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		27EA8E0E1A831F050051265A /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,7 @@
 				27C6D30D1A82B812008DC424 /* Models */,
 				2729D1B41A82B2860067FD8D /* ViewControllers */,
 				2729D1B01A828FBD0067FD8D /* APIController.swift */,
+				27EA8E0E1A831F050051265A /* MyPlayground.playground */,
 				2729D1691A826FDF0067FD8D /* LaunchScreen.xib */,
 				2729D15F1A826FDF0067FD8D /* RottenMangoes.xcdatamodeld */,
 				2729D15B1A826FDF0067FD8D /* Supporting Files */,
@@ -139,6 +143,7 @@
 				27EA8E061A82CE580051265A /* MovieDetailsViewController.swift */,
 				27C6D3101A82C0D1008DC424 /* CollectionViewCell.swift */,
 				27C6D30E1A82BCC6008DC424 /* CollectionViewController.swift */,
+				27EA8E0C1A82EDF10051265A /* WebViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2729D1631A826FDF0067FD8D /* ViewController.swift in Sources */,
+				27EA8E0D1A82EDF10051265A /* WebViewController.swift in Sources */,
 				2729D1611A826FDF0067FD8D /* RottenMangoes.xcdatamodeld in Sources */,
 				27EA8E071A82CE580051265A /* MovieDetailsViewController.swift in Sources */,
 				27C6D3111A82C0D1008DC424 /* CollectionViewCell.swift in Sources */,

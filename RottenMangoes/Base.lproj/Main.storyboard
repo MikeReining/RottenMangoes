@@ -182,6 +182,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="PTM-g7-S0c" secondAttribute="trailing" constant="15" id="ri2-Qh-AyQ"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Web View" id="ZOn-zU-zMs">
+                            <connections>
+                                <segue destination="Eav-kI-41r" kind="show" id="kOl-qc-Inz"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <connections>
                         <outlet property="movieNameLabel" destination="y01-fM-d33" id="zCk-U7-Xnh"/>
                         <outlet property="review1Label" destination="nQu-v0-Kna" id="XHs-U4-FNc"/>
@@ -193,6 +200,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oFo-yF-V9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1448" y="998"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="g0f-wi-9af">
+            <objects>
+                <viewController id="Eav-kI-41r" customClass="WebViewController" customModule="RottenMangoes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xur-O6-X29"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hjx-cd-1IK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aFl-Fa-roi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-I8-LJJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="u3D-I8-LJJ" secondAttribute="bottom" id="1yf-ax-PO2"/>
+                            <constraint firstItem="u3D-I8-LJJ" firstAttribute="top" secondItem="aFl-Fa-roi" secondAttribute="top" id="CWK-uj-bpL"/>
+                            <constraint firstAttribute="trailing" secondItem="u3D-I8-LJJ" secondAttribute="trailing" id="hOo-1B-7yO"/>
+                            <constraint firstItem="u3D-I8-LJJ" firstAttribute="leading" secondItem="aFl-Fa-roi" secondAttribute="leading" id="uLk-1n-0NA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="u3D-I8-LJJ" id="Fex-Pr-4tJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r74-xW-Qew" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1540" y="1712"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qie-yh-BbF">
