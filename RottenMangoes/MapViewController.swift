@@ -10,13 +10,14 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, APIControllerProtocol {
     let locationManager = CLLocationManager()
     var movie: Movie?
     var userLocation: CLLocationCoordinate2D?
     var theatres = [Theatre]()
     var api : APIController?
     var zipForURL: NSString?
+
     @IBOutlet weak var mapView: MKMapView!
     
     // Step 1 - Get User current location - DONE
@@ -93,7 +94,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.stopUpdatingLocation()
             var rawZipCode = placemark.postalCode
             zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
-            print(zipForURL)
             generateJSONURL(zipForURL!, movieName: movie!.title)
         }
     }
@@ -104,8 +104,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let midURL = "&movie="
         let myStringURL = baseURL + zipForURL + midURL + movieName
         print(myStringURL)
+        api = APIController(delegate: self)
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        api?.getJSONResults(myStringURL, searchFor: "theatres")
+
         
     }
     
+    //MARK API Controller Protocol Methods
+    func didReceiveAPIResults(results: NSDictionary) {
+        var resultsArr: NSArray = results["theatres"] as NSArray
+        dispatch_async(dispatch_get_main_queue(), {
+            self.theatres = Theatre.getTheatresWithJSON(resultsArr)
 
+            self.refreshGUI()
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            println(self.theatres[0].name)
+        })
+    }
+    
+    func refreshGUI() {
+        self.view.setNeedsDisplay()
+    }
+    
 }

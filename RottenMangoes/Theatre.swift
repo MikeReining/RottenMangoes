@@ -12,12 +12,12 @@ class Theatre {
     var id: String
     var name: String
     var address: String
-    var lat: String
-    var lng: String
+    var lat: Double
+    var lng: Double
     var zip: String?
     var theatres = [Theatre]()
     
-    init( id: String, name: String, address: String, lat: String, lng: String) {
+    init( id: String, name: String, address: String, lat: Double, lng: Double) {
         self.id = id
         self.name = name
         self.address = address
@@ -35,8 +35,8 @@ class Theatre {
                 var id = theatreResult["id"] as String
                 var name = theatreResult["name"] as String
                 var address = theatreResult["address"] as String
-                var lat = theatreResult["lat"] as String
-                var lng = theatreResult["lng"] as String
+                var lat = theatreResult["lat"] as Double
+                var lng = theatreResult["lng"] as Double
                 var theatre = Theatre(id: id, name: name, address: address, lat: lat, lng: lng)
                 theatres.append(theatre)
                 
