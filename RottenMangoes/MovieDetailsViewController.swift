@@ -28,7 +28,6 @@ class MovieDetailsViewController: UIViewController, APIControllerProtocol {
     override func viewDidLoad() {
         let movieID = String(movie!.movieID)
         let myStringURL = baseURL + movieID + midURL + apiKey + endURL
-        println(myStringURL)
         api = APIController(delegate: self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         api?.getJSONResults(myStringURL, searchFor: "reviews")
@@ -55,6 +54,15 @@ class MovieDetailsViewController: UIViewController, APIControllerProtocol {
 
     func refreshGUI() {
         self.view.setNeedsDisplay()
+    }
+    
+    //MARK: Segues
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showMapView" {
+            let nvc = segue.destinationViewController as MapViewController
+            nvc.movie = movie
+        }
     }
     
 }

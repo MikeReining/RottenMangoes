@@ -12,18 +12,15 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
-    // API URL Defaults
-    let baseURL = "http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?address="
-    let midURL = "&movie="
-
     var movie: Movie?
     var userLocation: CLLocationCoordinate2D?
     var theatres = [Theatre]()
     var api : APIController?
+    var zipForURL: NSString?
     @IBOutlet weak var mapView: MKMapView!
     
-    // Step 1 - Get User current location
-    // Step 2 - Get user ZIP
+    // Step 1 - Get User current location - DONE
+    // Step 2 - Get user ZIP - DONE
     // Step 3 - Construct API URL
     // Step 4 - Process JSON file
     // Step 5 - Generate Array of Theatre results
@@ -43,7 +40,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //MARK: Location Manager Delegate
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        println("New location")
     }
     
     
@@ -94,13 +90,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func displayLocationInfo(placemark: CLPlacemark) {
         if placemark.postalCode != nil {
-            //stop updating location to save battery life
             locationManager.stopUpdatingLocation()
-            println(placemark.locality)
-            println(placemark.postalCode)
-            println(placemark.administrativeArea)
-            println(placemark.country)
+            var rawZipCode = placemark.postalCode
+            zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
+            print(zipForURL)
+            generateJSONURL(zipForURL!, movieName: movie!.title)
         }
     }
+    
+    func generateJSONURL(zipForURL: String,movieName: String) {
+        // API URL Defaults
+        let baseURL = "http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?address="
+        let midURL = "&movie="
+        let myStringURL = baseURL + zipForURL + midURL + movieName
+        print(myStringURL)
+        
+    }
+    
 
 }

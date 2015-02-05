@@ -19,7 +19,6 @@ class ViewController: UITableViewController, APIControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         let myStringURL = URL + apiKey + pageLimit
-        println(myStringURL)
         api = APIController(delegate: self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         api?.getJSONResults(myStringURL, searchFor: "movies")
