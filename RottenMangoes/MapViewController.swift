@@ -94,7 +94,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.stopUpdatingLocation()
             var rawZipCode = placemark.postalCode
             zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
-            generateJSONURL(zipForURL!, movieName: movie!.title)
+            var movieNameForURL = movie?.title.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
+            generateJSONURL(zipForURL!, movieName: movieNameForURL!)
         }
     }
     
