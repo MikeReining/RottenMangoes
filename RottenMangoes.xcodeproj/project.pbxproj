@@ -101,7 +101,6 @@
 				2729D1671A826FDF0067FD8D /* Images.xcassets */,
 				27C6D30D1A82B812008DC424 /* Models */,
 				2729D1B41A82B2860067FD8D /* ViewControllers */,
-				2729D1B01A828FBD0067FD8D /* APIController.swift */,
 				27EA8E0E1A831F050051265A /* MyPlayground.playground */,
 				2729D1691A826FDF0067FD8D /* LaunchScreen.xib */,
 				2729D15F1A826FDF0067FD8D /* RottenMangoes.xcdatamodeld */,
@@ -153,6 +152,7 @@
 			children = (
 				2729D1AE1A828CBE0067FD8D /* Movie.swift */,
 				27EA8E0A1A82D8520051265A /* Review.swift */,
+				2729D1B01A828FBD0067FD8D /* APIController.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";

@@ -31,7 +31,7 @@ class MovieDetailsViewController: UIViewController, APIControllerProtocol {
         println(myStringURL)
         api = APIController(delegate: self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        api?.getJSONReviewResults(myStringURL)
+        api?.getJSONResults(myStringURL, searchFor: "reviews")
         self.navigationController?.setToolbarHidden(false, animated: true)
         
         movieNameLabel.text = movie?.title

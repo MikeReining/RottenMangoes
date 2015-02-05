@@ -22,7 +22,7 @@ class ViewController: UITableViewController, APIControllerProtocol {
         println(myStringURL)
         api = APIController(delegate: self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        api?.getJSONMovieResults(myStringURL)
+        api?.getJSONResults(myStringURL, searchFor: "movies")
         self.navigationController?.setToolbarHidden(false, animated: true)
 
     }
