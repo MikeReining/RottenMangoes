@@ -15,13 +15,13 @@ class WebViewController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
 
     override func viewDidLoad() {
-        let baseURL = "http://www.rottentomatoes.com/m/"
-        let movieTitle = movie!.title
+        let baseURL = "http://www.rottentomatoes.com/"
+//        let movieTitle = movie!.title
+//        
+//        var movieTitleURL: NSString = movieTitle.stringByReplacingOccurrencesOfString(" ", withString: "_", options: nil, range: nil)
         
-        var movieTitleURL: NSString = movieTitle.stringByReplacingOccurrencesOfString(" ", withString: "_", options: nil, range: nil)
         
-        
-        let url = NSURL(string: "http://google.com")
+        let url = NSURL(string: baseURL)
         let request = NSURLRequest(URL: url!)
         webView.loadRequest(request)
     }
