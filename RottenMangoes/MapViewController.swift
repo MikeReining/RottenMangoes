@@ -15,6 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var movie: Movie?
     var userLocation: CLLocationCoordinate2D?
     var theatres = [Theatre]()
+    var theatresByDistance = [Theatre]()
     var api : APIController?
     var zipForURL: NSString?
 
@@ -171,6 +172,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             var theatreLocation = CLLocation(latitude: theatre.lat, longitude: theatre.lng)
             theatre.distance = theatreLocation.distanceFromLocation(currentLocation)
         }
+        theatresByDistance = theatres
+        theatresByDistance.sort({ $0.distance < $1.distance })
         tableView.reloadData()
     }
     
@@ -179,14 +182,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return theatres.count
+        return theatresByDistance.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TheatreCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = theatres[indexPath.row].name
+        let movieName = theatresByDistance[indexPath.row].name
+        cell.textLabel?.text = movieName.truncate(35, trailing: "...")
+        let distance = theatresByDistance[indexPath.row].distance! / 1000
+        
+        cell.detailTextLabel?.text = NSString(format:"%.2f km", distance)
         return cell
         
     }
     
+}
+
+extension String {
+    /// Truncates the string to length number of characters and
+    /// appends optional trailing string if longer
+    func truncate(length: Int, trailing: String? = nil) -> String {
+        if countElements(self) > length {
+            return self.substringToIndex(advance(self.startIndex, length)) + (trailing ?? "")
+        } else {
+            return self
+        }
+    }
 }
