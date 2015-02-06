@@ -13,12 +13,12 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, APIControllerProtocol, UITableViewDataSource, UITableViewDelegate {
     let locationManager = CLLocationManager()
     var movie: Movie?
-    var userLocation: CLLocationCoordinate2D?
     var theatres = [Theatre]()
     var theatresByDistance = [Theatre]()
     var annotations = [AnyObject]()
     var api : APIController?
     var zipForURL: NSString?
+    var newZipCodeLocation: CLLocation?
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
@@ -209,6 +209,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // 1 caputre string entered by user
             let textField = alert.textFields![0] as UITextField
             let rawZipCode = textField.text
+            self.refreshGUI()
+            // 2 find new user location on map
+            self.GEOCodeFromZipCode(rawZipCode)
+            // 3. Update map with new location
+            
             // 2 turn zip into clean zipForURL
             let zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
             var movieNameForURL = self.movie?.title.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
@@ -234,10 +239,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         alert.addAction(cancelAction)
         
         presentViewController(alert, animated: true, completion: nil)
-        
-        
+    }
+    
+    
+    // Function to lookup new user location based on ZIP
+    func GEOCodeFromZipCode(zipCode: String) {
+        CLGeocoder().geocodeAddressString(zipCode, {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+            if let placemark = placemarks?[0] as? CLPlacemark {
+                var placemarkLocation: CLLocation = placemark.location
+                self.newZipCodeLocation = placemarkLocation
+            }
+        })
         
     }
+    
 }
 
 extension String {
