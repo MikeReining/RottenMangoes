@@ -43,21 +43,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.delegate = self
     }
     
-    override func viewDidAppear(animated: Bool) {
-        if currentLocation != nil {
-            let latitude = currentLocation?.coordinate.latitude
-            let longitude = currentLocation?.coordinate.longitude
-            let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
-            // 2
-            let span = MKCoordinateSpanMake(0.05, 0.05)
-            let region = MKCoordinateRegion(center: location, span: span)
-            mapView.setRegion(region, animated: true)
-            
-        }
-        
-        
-    }
-    
     //MARK: Location Manager Delegate
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
@@ -141,6 +126,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func refreshGUI() {
+        if currentLocation != nil {
+            let latitude = newZipCodeLocation?.coordinate.latitude
+            let longitude = newZipCodeLocation?.coordinate.longitude
+            let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+            // 2
+            let span = MKCoordinateSpanMake(0.50, 0.50)
+            let region = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+            
+        }
         addAnnotationsToMapView(theatres)
         self.view.setNeedsDisplay()
     }
@@ -225,21 +220,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // 1 caputre string entered by user
             let textField = alert.textFields![0] as UITextField
             let rawZipCode = textField.text
-            self.refreshGUI()
+
             // 2 find new user location on map
             self.GEOCodeFromZipCode(rawZipCode)
             // 3. Update map with new location
-            
-            // 2 turn zip into clean zipForURL
-            let zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
-            var movieNameForURL = self.movie?.title.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
-            // 3 generate URL >> calls function to process JSON >> Calls function generate new theatre array
-            self.generateJSONURL(zipForURL, movieName: movieNameForURL!)
-            // 5 create new map annotations
-            self.addAnnotationsToMapView(self.theatres)
-            // 6 calculate new distances >> reloads table
-            self.currentLocation = CLLocation(latitude: self.mapView.userLocation.coordinate.latitude, longitude: self.mapView.userLocation.coordinate.longitude)
-            self.distanceToAnnotations(self.currentLocation!)
+//            // 2 turn zip into clean zipForURL
+//            let zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
+//            var movieNameForURL = self.movie?.title.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
+//            // 3 generate URL >> calls function to process JSON >> Calls function generate new theatre array
+//            self.generateJSONURL(zipForURL, movieName: movieNameForURL!)
+//            // 5 create new map annotations
+//            self.addAnnotationsToMapView(self.theatres)
+//            // 6 calculate new distances >> reloads table
+//            self.currentLocation = CLLocation(latitude: self.mapView.userLocation.coordinate.latitude, longitude: self.mapView.userLocation.coordinate.longitude)
+//            self.distanceToAnnotations(self.currentLocation!)
             
         }
         
@@ -263,7 +257,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         CLGeocoder().geocodeAddressString(zipCode, {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0] as? CLPlacemark {
                 var placemarkLocation: CLLocation = placemark.location
+                var locationLatitude = placemark.location.coordinate.latitude
+                var locationLongitude = placemark.location.coordinate.longitude
                 self.newZipCodeLocation = placemarkLocation
+                self.refreshGUI()
             }
         })
         
