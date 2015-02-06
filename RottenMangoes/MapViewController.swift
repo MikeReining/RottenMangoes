@@ -36,6 +36,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         mapView.showsUserLocation = true
+        mapView.delegate = self
     }
     
     //MARK: Location Manager Delegate
@@ -54,13 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let userPoint = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(userPoint, animated: true)
         
-        //4 add annotation to current location
-        let annotation = MKPointAnnotation()
-        annotation.setCoordinate(location)
-        annotation.title = "Where am I?"
-        annotation.subtitle = "I am here!"
-        mapView.addAnnotation(annotation)
-        //5 stop updatinglocation
+        //4 stop updatinglocation
         locationManager.stopUpdatingLocation()
         
         
@@ -141,6 +136,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
 
         
+    }
+    
+    func mapView(mapView: MKMapView!,
+        viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+            
+            if annotation is MKUserLocation {
+                //return nil so map view draws "blue dot" for standard user location
+                return nil
+            }
+            
+            let reuseId = "pin"
+            
+            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            if pinView == nil {
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                pinView!.canShowCallout = true
+                pinView!.animatesDrop = true
+                pinView!.pinColor = .Red
+            }
+            else {
+                pinView!.annotation = annotation
+            }
+            
+            return pinView
     }
     
     
