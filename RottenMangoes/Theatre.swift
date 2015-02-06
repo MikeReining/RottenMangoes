@@ -15,6 +15,7 @@ class Theatre {
     var lat: Double
     var lng: Double
     var zip: String?
+    var distance: Double?
     var theatres = [Theatre]()
     
     init( id: String, name: String, address: String, lat: Double, lng: Double) {

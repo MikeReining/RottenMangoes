@@ -42,6 +42,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //MARK: Location Manager Delegate
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+        let currentLocation = CLLocation(latitude: mapView.userLocation.coordinate.latitude, longitude: mapView.userLocation.coordinate.longitude)
+        distanceToAnnotations(currentLocation)
     }
     
     
@@ -162,5 +164,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return pinView
     }
     
+    // Calculate distance to locations
+    func distanceToAnnotations(currentLocation: CLLocation) {
+        for theatre in theatres {
+            var theatreLocation = CLLocation(latitude: theatre.lat, longitude: theatre.lng)
+            theatre.distance = theatreLocation.distanceFromLocation(currentLocation)
+        }
+    }
     
 }
