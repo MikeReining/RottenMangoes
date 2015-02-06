@@ -19,6 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var annotations = [AnyObject]()
     var api : APIController?
     var zipForURL: NSString?
+    var zipSearchResult: String?
     var newZipCodeLocation: CLLocation?
 
     @IBOutlet weak var tableView: UITableView!
@@ -131,10 +132,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let longitude = newZipCodeLocation?.coordinate.longitude
             let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             // 2
-            let span = MKCoordinateSpanMake(0.50, 0.50)
+            let span = MKCoordinateSpanMake(0.5, 0.5)
             let region = MKCoordinateRegion(center: location, span: span)
             mapView.setRegion(region, animated: true)
-            
+            tableView.reloadData()
         }
         addAnnotationsToMapView(theatres)
         self.view.setNeedsDisplay()
@@ -180,10 +181,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     //MARK Table View Delegates Calculate distance to locations
-    func distanceToAnnotations(currentLocation: CLLocation) {
+    func distanceToAnnotations(location: CLLocation) {
         for theatre in theatres {
             var theatreLocation = CLLocation(latitude: theatre.lat, longitude: theatre.lng)
-            theatre.distance = theatreLocation.distanceFromLocation(currentLocation)
+            theatre.distance = theatreLocation.distanceFromLocation(location)
         }
         theatresByDistance = theatres
         theatresByDistance.sort({ $0.distance < $1.distance })
@@ -219,21 +220,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.mapView.removeAnnotations(self.annotations)
             // 1 caputre string entered by user
             let textField = alert.textFields![0] as UITextField
-            let rawZipCode = textField.text
+            self.zipSearchResult = textField.text
 
             // 2 find new user location on map
-            self.GEOCodeFromZipCode(rawZipCode)
+            self.GEOCodeFromZipCode(self.zipSearchResult!)
             // 3. Update map with new location
-//            // 2 turn zip into clean zipForURL
-//            let zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
-//            var movieNameForURL = self.movie?.title.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
-//            // 3 generate URL >> calls function to process JSON >> Calls function generate new theatre array
-//            self.generateJSONURL(zipForURL, movieName: movieNameForURL!)
-//            // 5 create new map annotations
-//            self.addAnnotationsToMapView(self.theatres)
-//            // 6 calculate new distances >> reloads table
-//            self.currentLocation = CLLocation(latitude: self.mapView.userLocation.coordinate.latitude, longitude: self.mapView.userLocation.coordinate.longitude)
-//            self.distanceToAnnotations(self.currentLocation!)
+            // 2 turn zip into clean zipForURL
+            // 3 generate URL >> calls function to process JSON >> Calls function generate new theatre array
+            // 5 create new map annotations
+            // 6 calculate new distances >> reloads table
             
         }
         
@@ -256,11 +251,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func GEOCodeFromZipCode(zipCode: String) {
         CLGeocoder().geocodeAddressString(zipCode, {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0] as? CLPlacemark {
+                self.theatres.removeAll(keepCapacity: false)
+                self.theatresByDistance.removeAll(keepCapacity: false)
                 var placemarkLocation: CLLocation = placemark.location
                 var locationLatitude = placemark.location.coordinate.latitude
                 var locationLongitude = placemark.location.coordinate.longitude
                 self.newZipCodeLocation = placemarkLocation
+                self.zipForURL = self.zipSearchResult!.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
+                var movieNameForURL = self.movie?.title.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
+                self.generateJSONURL(self.zipForURL!, movieName: movieNameForURL!)
+                self.addAnnotationsToMapView(self.theatres)
+                self.distanceToAnnotations(self.newZipCodeLocation!)
+
                 self.refreshGUI()
+
             }
         })
         
