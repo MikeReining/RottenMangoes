@@ -16,6 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var userLocation: CLLocationCoordinate2D?
     var theatres = [Theatre]()
     var theatresByDistance = [Theatre]()
+    var annotations = [AnyObject]()
     var api : APIController?
     var zipForURL: NSString?
 
@@ -136,6 +137,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotation.setCoordinate(location)
             annotation.title = theatre.name
             annotation.subtitle = theatre.address
+            annotations.append(annotation)
             mapView.addAnnotation(annotation)
         }
 
@@ -196,6 +198,46 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    //MARK Search By Zip
+    
+    @IBAction func searchByZipButtonPressed(sender: AnyObject) {
+        var alert = UIAlertController(title: "Search By Zip Code", message: "Please enter zip code below", preferredStyle: .Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
+            // 0 remove annotations from map
+            self.mapView.removeAnnotations(self.annotations)
+            // 1 caputre string entered by user
+            let textField = alert.textFields![0] as UITextField
+            let rawZipCode = textField.text
+            // 2 turn zip into clean zipForURL
+            let zipForURL = rawZipCode.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
+            var movieNameForURL = self.movie?.title.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
+            // 3 generate URL >> calls function to process JSON >> Calls function generate new theatre array
+            self.generateJSONURL(zipForURL, movieName: movieNameForURL!)
+            // 5 create new map annotations
+            self.addAnnotationsToMapView(self.theatres)
+            // 6 calculate new distances >> reloads table
+            let currentLocation = CLLocation(latitude: self.mapView.userLocation.coordinate.latitude, longitude: self.mapView.userLocation.coordinate.longitude)
+            self.distanceToAnnotations(currentLocation)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+            
+        }
+        
+        alert.addTextFieldWithConfigurationHandler {
+            (textField: UITextField!) -> Void in
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+        
+        
+        
+    }
 }
 
 extension String {

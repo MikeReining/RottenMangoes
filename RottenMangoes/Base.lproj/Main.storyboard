@@ -271,6 +271,13 @@
                             </mask>
                         </variation>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Search by Zip" id="Omb-m7-3cL">
+                            <connections>
+                                <action selector="searchByZipButtonPressed:" destination="k6E-ug-bJe" id="Dxa-YH-DTM"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <connections>
                         <outlet property="mapView" destination="928-nY-sIS" id="Okq-h5-Ecr"/>
                         <outlet property="tableView" destination="amH-fh-r2j" id="YdB-gu-0Ga"/>
