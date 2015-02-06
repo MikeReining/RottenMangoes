@@ -22,9 +22,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // Step 1 - Get User current location - DONE
     // Step 2 - Get user ZIP - DONE
-    // Step 3 - Construct API URL
-    // Step 4 - Process JSON file
-    // Step 5 - Generate Array of Theatre results
+    // Step 3 - Construct API URL - DONE
+    // Step 4 - Process JSON file - DONE
+    // Step 5 - Generate Array of Theatre results - DONE
     // Step 6 - Generate Pins for map based on results
     // Step 7 - Load Map view with current location and movie results
     
@@ -50,7 +50,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //2 create location point for map based on current location
         var location = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         //3 define layout for map
-        let span = MKCoordinateSpanMake(0.02, 0.02)
+        let span = MKCoordinateSpanMake(0.5, 0.5)
         let userPoint = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(userPoint, animated: true)
         
@@ -125,7 +125,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func refreshGUI() {
+        addAnnotationsToMapView(theatres)
         self.view.setNeedsDisplay()
     }
+    
+    //Add Pins / Annotations to Map view
+    func addAnnotationsToMapView(arrayOfLocations: [Theatre]) {
+        for theatre in arrayOfLocations {
+            let annotation = MKPointAnnotation()
+            var location = CLLocationCoordinate2D(latitude: theatre.lat, longitude: theatre.lng)
+            annotation.setCoordinate(location)
+            annotation.title = theatre.name
+            annotation.subtitle = theatre.address
+            mapView.addAnnotation(annotation)
+        }
+
+        
+    }
+    
     
 }
