@@ -15,6 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var movie: Movie?
     var theatres = [Theatre]()
     var theatresByDistance = [Theatre]()
+    var currentLocation: CLLocation?
     var annotations = [AnyObject]()
     var api : APIController?
     var zipForURL: NSString?
@@ -42,11 +43,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.delegate = self
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if currentLocation != nil {
+            let latitude = currentLocation?.coordinate.latitude
+            let longitude = currentLocation?.coordinate.longitude
+            let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+            // 2
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            let region = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+            
+        }
+        
+        
+    }
+    
     //MARK: Location Manager Delegate
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        let currentLocation = CLLocation(latitude: mapView.userLocation.coordinate.latitude, longitude: mapView.userLocation.coordinate.longitude)
-        distanceToAnnotations(currentLocation)
+        currentLocation = CLLocation(latitude: mapView.userLocation.coordinate.latitude, longitude: mapView.userLocation.coordinate.longitude)
+        distanceToAnnotations(currentLocation!)
     }
     
     
@@ -222,8 +238,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // 5 create new map annotations
             self.addAnnotationsToMapView(self.theatres)
             // 6 calculate new distances >> reloads table
-            let currentLocation = CLLocation(latitude: self.mapView.userLocation.coordinate.latitude, longitude: self.mapView.userLocation.coordinate.longitude)
-            self.distanceToAnnotations(currentLocation)
+            self.currentLocation = CLLocation(latitude: self.mapView.userLocation.coordinate.latitude, longitude: self.mapView.userLocation.coordinate.longitude)
+            self.distanceToAnnotations(self.currentLocation!)
             
         }
         
