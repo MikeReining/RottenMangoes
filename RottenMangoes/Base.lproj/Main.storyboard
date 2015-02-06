@@ -219,19 +219,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="928-nY-sIS">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="335"/>
                             </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="amH-fh-r2j">
+                                <rect key="frame" x="0.0" y="343" width="600" height="266"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TheatreCell" id="9te-fy-Jxs">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9te-fy-Jxs" id="GjW-sh-FQC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="k6E-ug-bJe" id="vef-gr-Pe0"/>
+                                    <outlet property="delegate" destination="k6E-ug-bJe" id="WRN-zn-Cqu"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="928-nY-sIS" firstAttribute="top" secondItem="7wc-rf-9Sq" secondAttribute="top" id="D3m-dS-LwB"/>
-                            <constraint firstItem="ITl-nj-n7D" firstAttribute="top" secondItem="928-nY-sIS" secondAttribute="bottom" id="jZg-Wt-Oa2"/>
+                            <constraint firstItem="928-nY-sIS" firstAttribute="height" secondItem="amH-fh-r2j" secondAttribute="height" constant="69" id="D4b-TK-8dG"/>
+                            <constraint firstAttribute="bottom" secondItem="amH-fh-r2j" secondAttribute="bottom" constant="-9" id="Oc5-v5-ewx"/>
+                            <constraint firstAttribute="trailing" secondItem="amH-fh-r2j" secondAttribute="trailing" id="S5i-PA-kUC"/>
+                            <constraint firstItem="ITl-nj-n7D" firstAttribute="top" secondItem="928-nY-sIS" secondAttribute="bottom" constant="221" id="jZg-Wt-Oa2"/>
+                            <constraint firstItem="amH-fh-r2j" firstAttribute="leading" secondItem="7wc-rf-9Sq" secondAttribute="leading" id="kPY-ni-qD9"/>
+                            <constraint firstItem="amH-fh-r2j" firstAttribute="top" secondItem="928-nY-sIS" secondAttribute="bottom" constant="8" id="kPk-e2-Lbs"/>
                             <constraint firstItem="928-nY-sIS" firstAttribute="leading" secondItem="7wc-rf-9Sq" secondAttribute="leading" id="lap-7G-eKd"/>
                             <constraint firstAttribute="trailing" secondItem="928-nY-sIS" secondAttribute="trailing" id="u49-Gv-bqc"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="jZg-Wt-Oa2"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="928-nY-sIS" id="Okq-h5-Ecr"/>
+                        <outlet property="tableView" destination="amH-fh-r2j" id="YdB-gu-0Ga"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Rb-9f-LSS" userLabel="First Responder" sceneMemberID="firstResponder"/>

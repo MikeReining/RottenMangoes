@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, APIControllerProtocol {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, APIControllerProtocol, UITableViewDataSource, UITableViewDelegate {
     let locationManager = CLLocationManager()
     var movie: Movie?
     var userLocation: CLLocationCoordinate2D?
@@ -18,6 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var api : APIController?
     var zipForURL: NSString?
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
     
     // Step 1 - Get User current location - DONE
@@ -164,12 +165,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return pinView
     }
     
-    // Calculate distance to locations
+    //MARK Table View Delegates Calculate distance to locations
     func distanceToAnnotations(currentLocation: CLLocation) {
         for theatre in theatres {
             var theatreLocation = CLLocation(latitude: theatre.lat, longitude: theatre.lng)
             theatre.distance = theatreLocation.distanceFromLocation(currentLocation)
         }
+        tableView.reloadData()
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return theatres.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("TheatreCell", forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel?.text = theatres[indexPath.row].name
+        return cell
+        
     }
     
 }
