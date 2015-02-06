@@ -149,21 +149,37 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 //return nil so map view draws "blue dot" for standard user location
                 return nil
             }
+
+            let pinID = "pinID"
+            let annoID = "annoID"
             
-            let reuseId = "pin"
+            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(pinID) as? MKPinAnnotationView
+            var annoView = mapView.dequeueReusableAnnotationViewWithIdentifier(annoID) as MKAnnotationView!
             
-            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-            if pinView == nil {
-                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                pinView!.canShowCallout = true
-                pinView!.animatesDrop = true
-                pinView!.pinColor = .Red
+            if annotation.title == "Cineplex Odeon International Village Cinemas" {
+                // set custom anno
+                if annoView == nil {
+                    annoView = MKAnnotationView(annotation: annotation, reuseIdentifier: annoID)
+                }
+                    annoView.canShowCallout = true
+                    
+                    annoView.image = UIImage(named: "pinYellow")
+                    return annoView
+
+            } else {
+                // set other pins as red pins
+                if pinView == nil {
+                    pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinID)
+                    pinView!.canShowCallout = true
+                    pinView!.animatesDrop = true
+
+
+                }
+                    pinView!.annotation = annotation
+                return pinView
+
+            
             }
-            else {
-                pinView!.annotation = annotation
-            }
-            
-            return pinView
     }
     
     //MARK Table View Delegates Calculate distance to locations
