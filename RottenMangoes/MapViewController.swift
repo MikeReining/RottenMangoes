@@ -14,10 +14,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let locationManager = CLLocationManager()
     var movie: Movie?
     var userLocation: CLLocationCoordinate2D?
+    var userCLLocation: CLLocation?
     var theatres = [Theatre]()
     var api : APIController?
     var zipForURL: NSString?
-
+    
     @IBOutlet weak var mapView: MKMapView!
     
     // Step 1 - Get User current location - DONE
@@ -25,8 +26,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // Step 3 - Construct API URL - DONE
     // Step 4 - Process JSON file - DONE
     // Step 5 - Generate Array of Theatre results - DONE
-    // Step 6 - Generate Pins for map based on results
-    // Step 7 - Load Map view with current location and movie results
+    // Step 6 - Generate Pins for map based on results - DONE
+    // Step 7 - Load Map view with current location and movie results - DONE
+    // Step 8 - use viewForAnnotation to animate pins - DONE
+    // Step 9 - calcualte distance between points
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //MARK: Location Manager Delegate
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+        self.distanceToAnnotations()
     }
     
     
@@ -50,6 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var currentLocation = locations.last as CLLocation
         //2 create location point for map based on current location
         var location = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        userCLLocation = CLLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.latitude)
         //3 define layout for map
         let span = MKCoordinateSpanMake(0.5, 0.5)
         let userPoint = MKCoordinateRegion(center: location, span: span)
@@ -103,7 +108,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         api = APIController(delegate: self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         api?.getJSONResults(myStringURL, searchFor: "theatres")
-
+        
         
     }
     
@@ -112,7 +117,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var resultsArr: NSArray = results["theatres"] as NSArray
         dispatch_async(dispatch_get_main_queue(), {
             self.theatres = Theatre.getTheatresWithJSON(resultsArr)
-
             self.refreshGUI()
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             println(self.theatres[0].name)
@@ -134,10 +138,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotation.subtitle = theatre.address
             mapView.addAnnotation(annotation)
         }
-
+        
         
     }
     
+    // Animate pins being dropped on map
     func mapView(mapView: MKMapView!,
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
@@ -162,5 +167,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return pinView
     }
     
-    
+    // Calculate distance to locations
+    func distanceToAnnotations() {
+        for theatre in theatres {
+            var theatreLocation = CLLocation(latitude: theatre.lat, longitude: theatre.lng)
+            theatre.distance = theatreLocation.distanceFromLocation(userCLLocation)
+            println(theatre.distance)
+        }
+    }
 }
